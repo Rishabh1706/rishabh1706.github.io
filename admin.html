@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin - Add Content</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f7fafc;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            margin-bottom: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .json-output {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .output-container {
+            position: relative;
+        }
+
+        .skills-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .skill-tag {
+            background: #e2e8f0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .skill-tag .remove {
+            cursor: pointer;
+            color: #e53e3e;
+        }
+
+        .add-skill {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .add-skill input {
+            flex: 1;
+        }
+
+        .add-skill button {
+            padding: 8px 16px;
+            background: #48bb78;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cog"></i> Portfolio Content Manager</h1>
+            <p>Easily add new experiences, projects, education, and certifications to your portfolio</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('experience')">Experience</button>
+            <button class="tab" onclick="showTab('project')">Project</button>
+            <button class="tab" onclick="showTab('education')">Education</button>
+            <button class="tab" onclick="showTab('certification')">Certification</button>
+        </div>
+
+        <!-- Experience Form -->
+        <div id="experience-tab" class="tab-content active">
+            <h2>Add New Experience</h2>
+            <form id="experience-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="exp-company">Company</label>
+                        <input type="text" id="exp-company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exp-position">Position</label>
+                        <input type="text" id="exp-position" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="exp-start">Start Date</label>
+                        <input type="text" id="exp-start" placeholder="e.g., Jan 2023" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exp-end">End Date</label>
+                        <input type="text" id="exp-end" placeholder="e.g., Present" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exp-logo">Company Logo URL</label>
+                    <input type="url" id="exp-logo" placeholder="https://example.com/logo.svg">
+                </div>
+
+                <div class="form-group">
+                    <label for="exp-description">Description</label>
+                    <textarea id="exp-description" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Skills/Technologies</label>
+                    <div class="add-skill">
+                        <input type="text" id="exp-skill-input" placeholder="Enter a skill">
+                        <button type="button" onclick="addSkill('exp')">Add</button>
+                    </div>
+                    <div id="exp-skills" class="skills-input"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Generate Experience JSON</button>
+            </form>
+
+            <div class="output-container">
+                <div id="experience-output" class="json-output" style="display: none;"></div>
+                <button class="copy-btn" onclick="copyToClipboard('experience-output')" style="display: none;">Copy</button>
+            </div>
+        </div>
+
+        <!-- Project Form -->
+        <div id="project-tab" class="tab-content">
+            <h2>Add New Project</h2>
+            <form id="project-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="proj-title">Project Title</label>
+                        <input type="text" id="proj-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="proj-category">Category</label>
+                        <select id="proj-category" required>
+                            <option value="DevOps">DevOps</option>
+                            <option value="Security">Security</option>
+                            <option value="Analytics">Analytics</option>
+                            <option value="Monitoring">Monitoring</option>
+                            <option value="AI/ML">AI/ML</option>
+                            <option value="Infrastructure">Infrastructure</option>
+                            <option value="Web Development">Web Development</option>
+                            <option value="Mobile">Mobile</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="proj-description">Description</label>
+                    <textarea id="proj-description" rows="4" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="proj-icon">Icon URL</label>
+                        <input type="url" id="proj-icon" placeholder="https://example.com/icon.svg">
+                    </div>
+                    <div class="form-group">
+                        <label for="proj-featured">Featured Project?</label>
+                        <select id="proj-featured">
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="proj-demo">Demo URL</label>
+                        <input type="url" id="proj-demo" placeholder="https://demo.example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="proj-github">GitHub URL</label>
+                        <input type="url" id="proj-github" placeholder="https://github.com/user/repo">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Technologies</label>
+                    <div class="add-skill">
+                        <input type="text" id="proj-tech-input" placeholder="Enter a technology">
+                        <button type="button" onclick="addSkill('proj')">Add</button>
+                    </div>
+                    <div id="proj-skills" class="skills-input"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Generate Project JSON</button>
+            </form>
+
+            <div class="output-container">
+                <div id="project-output" class="json-output" style="display: none;"></div>
+                <button class="copy-btn" onclick="copyToClipboard('project-output')" style="display: none;">Copy</button>
+            </div>
+        </div>
+
+        <!-- Education Form -->
+        <div id="education-tab" class="tab-content">
+            <h2>Add New Education</h2>
+            <form id="education-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edu-degree">Degree</label>
+                        <input type="text" id="edu-degree" placeholder="e.g., Master of Technology" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edu-field">Field of Study</label>
+                        <input type="text" id="edu-field" placeholder="e.g., Computer Science" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edu-institution">Institution</label>
+                        <input type="text" id="edu-institution" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edu-year">Year</label>
+                        <input type="text" id="edu-year" placeholder="e.g., 2020-2024" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edu-logo">Institution Logo URL</label>
+                    <input type="url" id="edu-logo" placeholder="https://example.com/logo.svg">
+                </div>
+
+                <div class="form-group">
+                    <label for="edu-description">Description</label>
+                    <textarea id="edu-description" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Skills/Subjects</label>
+                    <div class="add-skill">
+                        <input type="text" id="edu-skill-input" placeholder="Enter a skill">
+                        <button type="button" onclick="addSkill('edu')">Add</button>
+                    </div>
+                    <div id="edu-skills" class="skills-input"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Generate Education JSON</button>
+            </form>
+
+            <div class="output-container">
+                <div id="education-output" class="json-output" style="display: none;"></div>
+                <button class="copy-btn" onclick="copyToClipboard('education-output')" style="display: none;">Copy</button>
+            </div>
+        </div>
+
+        <!-- Certification Form -->
+        <div id="certification-tab" class="tab-content">
+            <h2>Add New Certification</h2>
+            <form id="certification-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cert-name">Certification Name</label>
+                        <input type="text" id="cert-name" placeholder="e.g., AWS Solutions Architect" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cert-full-name">Full Name</label>
+                        <input type="text" id="cert-full-name" placeholder="AWS Certified Solutions Architect - Associate" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cert-issuer">Issuer</label>
+                        <input type="text" id="cert-issuer" placeholder="e.g., Amazon Web Services" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cert-level">Level</label>
+                        <select id="cert-level" required>
+                            <option value="Fundamentals">Fundamentals</option>
+                            <option value="Associate">Associate</option>
+                            <option value="Professional">Professional</option>
+                            <option value="Expert">Expert</option>
+                            <option value="Specialist">Specialist</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cert-date">Date Obtained</label>
+                        <input type="text" id="cert-date" placeholder="e.g., 2023" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cert-expiry">Expiry Date</label>
+                        <input type="text" id="cert-expiry" placeholder="e.g., 2026">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cert-icon">Icon Class</label>
+                        <input type="text" id="cert-icon" placeholder="e.g., fab fa-aws" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cert-url">Credential URL</label>
+                        <input type="url" id="cert-url" placeholder="https://verify.example.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Related Skills</label>
+                    <div class="add-skill">
+                        <input type="text" id="cert-skill-input" placeholder="Enter a skill">
+                        <button type="button" onclick="addSkill('cert')">Add</button>
+                    </div>
+                    <div id="cert-skills" class="skills-input"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Generate Certification JSON</button>
+            </form>
+
+            <div class="output-container">
+                <div id="certification-output" class="json-output" style="display: none;"></div>
+                <button class="copy-btn" onclick="copyToClipboard('certification-output')" style="display: none;">Copy</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let skillsData = {
+            exp: [],
+            proj: [],
+            edu: [],
+            cert: []
+        };
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function addSkill(prefix) {
+            const input = document.getElementById(prefix + '-skill-input');
+            const skillsContainer = document.getElementById(prefix + '-skills');
+            const skill = input.value.trim();
+
+            if (skill && !skillsData[prefix].includes(skill)) {
+                skillsData[prefix].push(skill);
+                updateSkillsDisplay(prefix);
+                input.value = '';
+            }
+        }
+
+        function removeSkill(prefix, skill) {
+            skillsData[prefix] = skillsData[prefix].filter(s => s !== skill);
+            updateSkillsDisplay(prefix);
+        }
+
+        function updateSkillsDisplay(prefix) {
+            const container = document.getElementById(prefix + '-skills');
+            container.innerHTML = skillsData[prefix].map(skill => 
+                `<span class="skill-tag">${skill} <span class="remove" onclick="removeSkill('${prefix}', '${skill}')">&times;</span></span>`
+            ).join('');
+        }
+
+        function generateId(text) {
+            return text.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            navigator.clipboard.writeText(element.textContent).then(() => {
+                alert('JSON copied to clipboard!');
+            });
+        }
+
+        // Form handlers
+        document.getElementById('experience-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                id: generateId(document.getElementById('exp-company').value + '-' + new Date().getFullYear()),
+                company: document.getElementById('exp-company').value,
+                logo: document.getElementById('exp-logo').value || 'custom-gradient',
+                position: document.getElementById('exp-position').value,
+                startDate: document.getElementById('exp-start').value,
+                endDate: document.getElementById('exp-end').value,
+                description: document.getElementById('exp-description').value,
+                skills: skillsData.exp,
+                achievements: []
+            };
+
+            if (!document.getElementById('exp-logo').value) {
+                data.logoText = document.getElementById('exp-company').value.split(' ').map(word => word[0]).join('').toUpperCase().substring(0, 2);
+            }
+
+            const output = document.getElementById('experience-output');
+            output.textContent = JSON.stringify(data, null, 2);
+            output.style.display = 'block';
+            output.nextElementSibling.style.display = 'block';
+        });
+
+        document.getElementById('project-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                id: generateId(document.getElementById('proj-title').value),
+                title: document.getElementById('proj-title').value,
+                description: document.getElementById('proj-description').value,
+                icon: document.getElementById('proj-icon').value,
+                technologies: skillsData.proj,
+                category: document.getElementById('proj-category').value,
+                featured: document.getElementById('proj-featured').value === 'true',
+                stats: [],
+                links: {
+                    demo: document.getElementById('proj-demo').value || '#',
+                    github: document.getElementById('proj-github').value || '#'
+                },
+                metrics: {}
+            };
+
+            const output = document.getElementById('project-output');
+            output.textContent = JSON.stringify(data, null, 2);
+            output.style.display = 'block';
+            output.nextElementSibling.style.display = 'block';
+        });
+
+        document.getElementById('education-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                id: generateId(document.getElementById('edu-institution').value + '-' + document.getElementById('edu-degree').value),
+                degree: document.getElementById('edu-degree').value,
+                field: document.getElementById('edu-field').value,
+                institution: document.getElementById('edu-institution').value,
+                year: document.getElementById('edu-year').value,
+                logo: document.getElementById('edu-logo').value,
+                description: document.getElementById('edu-description').value,
+                skills: skillsData.edu,
+                projects: []
+            };
+
+            const output = document.getElementById('education-output');
+            output.textContent = JSON.stringify(data, null, 2);
+            output.style.display = 'block';
+            output.nextElementSibling.style.display = 'block';
+        });
+
+        document.getElementById('certification-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                id: generateId(document.getElementById('cert-name').value),
+                name: document.getElementById('cert-name').value,
+                fullName: document.getElementById('cert-full-name').value,
+                issuer: document.getElementById('cert-issuer').value,
+                icon: document.getElementById('cert-icon').value,
+                date: document.getElementById('cert-date').value,
+                expiryDate: document.getElementById('cert-expiry').value,
+                credentialUrl: document.getElementById('cert-url').value || '#',
+                skills: skillsData.cert,
+                level: document.getElementById('cert-level').value
+            };
+
+            const output = document.getElementById('certification-output');
+            output.textContent = JSON.stringify(data, null, 2);
+            output.style.display = 'block';
+            output.nextElementSibling.style.display = 'block';
+        });
+
+        // Allow Enter key to add skills
+        document.querySelectorAll('[id$="-skill-input"]').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const prefix = this.id.split('-')[0];
+                    addSkill(prefix);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

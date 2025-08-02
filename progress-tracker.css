@@ -1,0 +1,757 @@
+/* Progress Tracker Specific Styles */
+
+/* Learning Hero Section */
+.learning-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.learning-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+    animation: gradientShift 15s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+}
+
+/* Learning Stats */
+.learning-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    max-width: 600px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-align: center;
+    color: white;
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.stat-card .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.stat-card .stat-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+}
+
+/* Progress Circle */
+.progress-circle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 8;
+}
+
+.progress-ring-fill {
+    fill: none;
+    stroke: white;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 565.48;
+    stroke-dashoffset: 565.48;
+    transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.progress-text {
+    position: absolute;
+    text-align: center;
+    color: white;
+}
+
+.progress-number {
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+}
+
+.progress-stage {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Quick Actions */
+.quick-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.quick-actions .btn {
+    min-width: 180px;
+}
+
+/* Session Timer */
+.session-timer {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    padding: 1rem 2rem;
+    margin: 2rem auto 0;
+    width: fit-content;
+    color: white;
+}
+
+.timer-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+.timer-display i {
+    color: #fbbf24;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Current Stage Section */
+.current-stage {
+    background: var(--bg-secondary);
+    padding: 100px 0;
+}
+
+.stage-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.stage-header {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 2rem;
+    align-items: center;
+}
+
+.stage-number {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.stage-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stage-info p {
+    opacity: 0.9;
+    margin: 0;
+}
+
+.stage-progress {
+    text-align: right;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: white;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.stage-content {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.current-week h4,
+.weekly-goals h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.week-topics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.topic {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius);
+}
+
+.topic i {
+    color: var(--primary-color);
+    width: 20px;
+}
+
+.goals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.goal-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.goal-item:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.goal-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+}
+
+.goal-item label {
+    cursor: pointer;
+    flex: 1;
+}
+
+/* Progress Overview */
+.progress-overview {
+    background: var(--bg-primary);
+    padding: 100px 0;
+}
+
+/* Status Indicator */
+.status-indicator {
+    margin-bottom: 3rem;
+}
+
+.status-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 2rem;
+    align-items: center;
+}
+
+.status-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.status-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.status-content p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Stages Grid */
+.stages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.stage-item {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.stage-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.stage-item.completed {
+    border-color: #10b981;
+}
+
+.stage-item.completed .stage-icon {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.stage-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+}
+
+.stage-item h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.stage-duration {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.stage-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.stage-progress-bar .progress-fill {
+    background: var(--gradient-primary);
+}
+
+.stage-status {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Timeline Section */
+.timeline-section {
+    background: var(--bg-secondary);
+    padding: 100px 0;
+}
+
+.timeline-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.timeline-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.timeline-btn.active,
+.timeline-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.timeline-container {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    min-height: 400px;
+}
+
+/* Analytics Section */
+.analytics {
+    background: var(--bg-primary);
+    padding: 100px 0;
+}
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.analytics-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+}
+
+.analytics-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.chart-container {
+    position: relative;
+    height: 250px;
+}
+
+/* Streak Calendar */
+.streak-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.calendar-day.active {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.calendar-day.today {
+    border: 2px solid var(--primary-color);
+}
+
+/* Achievements */
+.achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.achievement {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background: var(--bg-secondary);
+    transition: var(--transition);
+}
+
+.achievement.locked {
+    opacity: 0.5;
+}
+
+.achievement:not(.locked):hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.achievement-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.achievement.locked .achievement-icon {
+    background: #9ca3af;
+}
+
+.achievement-content h4 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+
+.achievement-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--border-radius);
+    max-width: 500px;
+    margin: 5% auto;
+    box-shadow: var(--shadow-xl);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    padding: 2rem 2rem 1rem;
+    border-bottom: 1px solid var(--bg-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    background: var(--bg-secondary);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    padding: 1rem 2rem 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-group textarea,
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--bg-secondary);
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-group textarea:focus,
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Mood Selector */
+.mood-selector {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mood-btn {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--bg-secondary);
+    border-radius: 50%;
+    background: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mood-btn:hover,
+.mood-btn.selected {
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .learning-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stage-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .stage-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .status-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .quick-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .timeline-controls {
+        flex-wrap: wrap;
+    }
+    
+    .modal-content {
+        margin: 10% 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .learning-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-card .stat-number {
+        font-size: 2rem;
+    }
+    
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stages-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Progress Tracker | Rishabh Gupta - 12-Month Journey</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="progress-tracker.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Learning Progress Tracker</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#overview" class="nav-link">Overview</a></li>
+                <li class="nav-item"><a href="#current-stage" class="nav-link">Current Stage</a></li>
+                <li class="nav-item"><a href="#progress" class="nav-link">Progress</a></li>
+                <li class="nav-item"><a href="#timeline" class="nav-link">Timeline</a></li>
+                <li class="nav-item"><a href="#analytics" class="nav-link">Analytics</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">← Back to Portfolio</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="overview" class="hero learning-hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="typing-text">12-Month Learning Journey</span>
+                        <span class="cursor">|</span>
+                    </h1>
+                    <h2 class="hero-subtitle">Data Engineering, MLOps & Cloud Mastery</h2>
+                    <div class="learning-stats">
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-days">0</div>
+                            <div class="stat-label">Days Active</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-hours">0.0</div>
+                            <div class="stat-label">Hours Logged</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="current-streak">0</div>
+                            <div class="stat-label">Day Streak</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="progress-percentage">0</div>
+                            <div class="stat-label">% Complete</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="progress-circle">
+                        <svg class="progress-ring" width="200" height="200">
+                            <circle class="progress-ring-bg" cx="100" cy="100" r="90"></circle>
+                            <circle class="progress-ring-fill" cx="100" cy="100" r="90" id="progress-circle"></circle>
+                        </svg>
+                        <div class="progress-text">
+                            <span class="progress-number" id="circle-progress">0%</span>
+                            <span class="progress-stage" id="current-stage-name">Stage 1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button class="btn btn-primary" id="start-session">
+                <i class="fas fa-play"></i>
+                Start Learning Session
+            </button>
+            <button class="btn btn-secondary" id="end-session" style="display: none;">
+                <i class="fas fa-stop"></i>
+                End Session
+            </button>
+            <button class="btn btn-outline" id="check-status">
+                <i class="fas fa-chart-line"></i>
+                Check Progress Status
+            </button>
+        </div>
+
+        <!-- Session Timer -->
+        <div class="session-timer" id="session-timer" style="display: none;">
+            <div class="timer-display">
+                <i class="fas fa-clock"></i>
+                <span>Current Session: </span>
+                <span id="session-time">00:00:00</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Stage Section -->
+    <section id="current-stage" class="current-stage">
+        <div class="container">
+            <h2 class="section-title">Current Learning Stage</h2>
+            <div class="stage-card" id="current-stage-card">
+                <div class="stage-header">
+                    <div class="stage-number">1</div>
+                    <div class="stage-info">
+                        <h3>Core Programming + Data Foundations</h3>
+                        <p>Building solid fundamentals in Python, algorithms, and data structures</p>
+                    </div>
+                    <div class="stage-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+                </div>
+                
+                <div class="stage-content">
+                    <div class="current-week">
+                        <h4>This Week's Focus</h4>
+                        <div class="week-topics">
+                            <div class="topic">
+                                <i class="fab fa-python"></i>
+                                <span>Python Expert Level</span>
+                            </div>
+                            <div class="topic">
+                                <i class="fas fa-code"></i>
+                                <span>OOP Deep Dive</span>
+                            </div>
+                            <div class="topic">
+                                <i class="fas fa-cog"></i>
+                                <span>Decorators & Generators</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="weekly-goals">
+                        <h4>Weekly Goals</h4>
+                        <div class="goals-list">
+                            <div class="goal-item">
+                                <input type="checkbox" id="goal1">
+                                <label for="goal1">Complete Python OOP deep dive</label>
+                            </div>
+                            <div class="goal-item">
+                                <input type="checkbox" id="goal2">
+                                <label for="goal2">Build multi-threaded web scraper</label>
+                            </div>
+                            <div class="goal-item">
+                                <input type="checkbox" id="goal3">
+                                <label for="goal3">Create decorator library</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Overview -->
+    <section id="progress" class="progress-overview">
+        <div class="container">
+            <h2 class="section-title">Learning Progress Overview</h2>
+            
+            <!-- Status Indicator -->
+            <div class="status-indicator" id="status-indicator">
+                <div class="status-card">
+                    <div class="status-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="status-content">
+                        <h3 id="status-title">On Track</h3>
+                        <p id="status-description">You're making excellent progress! Keep up the momentum.</p>
+                    </div>
+                    <div class="status-actions">
+                        <button class="btn btn-small" id="view-recommendations">
+                            <i class="fas fa-lightbulb"></i>
+                            View Recommendations
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage Progress Grid -->
+            <div class="stages-grid">
+                <div class="stage-item active" data-stage="1">
+                    <div class="stage-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h4>Stage 1: Foundations</h4>
+                    <div class="stage-duration">Months 1-2</div>
+                    <div class="stage-progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="stage-status">Not Started</div>
+                </div>
+
+                <div class="stage-item" data-stage="2">
+                    <div class="stage-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h4>Stage 2: Backend</h4>
+                    <div class="stage-duration">Months 3-4</div>
+                    <div class="stage-progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="stage-status">Not Started</div>
+                </div>
+
+                <div class="stage-item" data-stage="3">
+                    <div class="stage-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h4>Stage 3: Data Engineering</h4>
+                    <div class="stage-duration">Months 5-6</div>
+                    <div class="stage-progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="stage-status">Not Started</div>
+                </div>
+
+                <div class="stage-item" data-stage="4">
+                    <div class="stage-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h4>Stage 4: DevOps & Cloud</h4>
+                    <div class="stage-duration">Months 7-8</div>
+                    <div class="stage-progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="stage-status">Not Started</div>
+                </div>
+
+                <div class="stage-item" data-stage="5">
+                    <div class="stage-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h4>Stage 5: Machine Learning</h4>
+                    <div class="stage-duration">Month 9</div>
+                    <div class="stage-progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="stage-status">Not Started</div>
+                </div>
+
+                <div class="stage-item" data-stage="6">
+                    <div class="stage-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h4>Stage 6: MLOps</h4>
+                    <div class="stage-duration">Month 10</div>
+                    <div class="stage-progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="stage-status">Not Started</div>
+                </div>
+
+                <div class="stage-item" data-stage="7">
+                    <div class="stage-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h4>Stage 7: GenAI/LLMs</h4>
+                    <div class="stage-duration">Month 11</div>
+                    <div class="stage-progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="stage-status">Not Started</div>
+                </div>
+
+                <div class="stage-item" data-stage="8">
+                    <div class="stage-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h4>Stage 8: Capstone</h4>
+                    <div class="stage-duration">Month 12</div>
+                    <div class="stage-progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="stage-status">Not Started</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">Learning Timeline</h2>
+            <div class="timeline-controls">
+                <button class="timeline-btn active" data-view="weekly">Weekly View</button>
+                <button class="timeline-btn" data-view="monthly">Monthly View</button>
+                <button class="timeline-btn" data-view="yearly">Yearly View</button>
+            </div>
+            
+            <div class="timeline-container" id="timeline-container">
+                <!-- Weekly view content will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section id="analytics" class="analytics">
+        <div class="container">
+            <h2 class="section-title">Learning Analytics</h2>
+            
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Time Distribution</h3>
+                    <div class="chart-container">
+                        <canvas id="time-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="analytics-card">
+                    <h3>Weekly Progress</h3>
+                    <div class="chart-container">
+                        <canvas id="progress-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="analytics-card">
+                    <h3>Learning Streaks</h3>
+                    <div class="streak-calendar" id="streak-calendar">
+                        <!-- Calendar will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="analytics-card">
+                    <h3>Achievements</h3>
+                    <div class="achievements-list">
+                        <div class="achievement">
+                            <div class="achievement-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="achievement-content">
+                                <h4>7-Day Streak</h4>
+                                <p>Completed 7 consecutive days of learning</p>
+                            </div>
+                        </div>
+                        <div class="achievement locked">
+                            <div class="achievement-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="achievement-content">
+                                <h4>100 Hours</h4>
+                                <p>Log 100 total hours of learning</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notes Modal -->
+    <div class="modal" id="notes-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Session Notes</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>What did you learn today?</label>
+                    <textarea id="session-notes" placeholder="Describe your learning achievements, challenges, and insights..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Topics Covered</label>
+                    <input type="text" id="topics-covered" placeholder="e.g., Python OOP, Decorators, Async Programming">
+                </div>
+                <div class="form-group">
+                    <label>Difficulty Level</label>
+                    <select id="difficulty-level">
+                        <option value="1">1 - Very Easy</option>
+                        <option value="2">2 - Easy</option>
+                        <option value="3">3 - Moderate</option>
+                        <option value="4">4 - Challenging</option>
+                        <option value="5">5 - Very Challenging</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Mood/Energy Level</label>
+                    <div class="mood-selector">
+                        <button class="mood-btn" data-mood="😴">😴</button>
+                        <button class="mood-btn" data-mood="😐">😐</button>
+                        <button class="mood-btn" data-mood="🙂">🙂</button>
+                        <button class="mood-btn" data-mood="😊">😊</button>
+                        <button class="mood-btn" data-mood="🚀">🚀</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="save-notes">Save Session</button>
+                <button class="btn btn-primary" id="save-and-close">Save & Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script src="progress-tracker.js"></script>
+</body>
+</html>
